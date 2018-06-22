@@ -1,0 +1,77 @@
+<template>
+    <div style="margin:0.1rem 0">
+        <div class="item">
+            <img src="../../../images/164501285909002725.png" class="icon-1" alt=""><span style="font-size:0.12rem;margin-left:0.05rem;color:#999999">3100单</span><span style="font-size:0.12rem;margin-left:0.05rem;color:#999999">96.88%</span>
+            <img src="../../../images/rz2x.png" class="icon-1" alt="">
+            <span class="jiaoyiliang">30000-500000</span>
+            <span>　　</span>
+            <div class="btn" @click="purchase">
+                买入
+            </div>
+        </div>
+        <div class="item" style="padding-bottom:0.1rem">
+            <div style="font-size:0.14rem;width:33%;color:#323232">6.51</div>
+            <div style="font-size:0.14rem;width:33%;color:#323232">73461.55</div>
+            <div style="font-size:0.14rem;width:33%;color:#323232">47512.01</div>
+            <div style="font-size:0.1rem;width:33%;color:#999999">CNY</div>
+            <div style="font-size:0.1rem;width:33%;color:#999999">数量</div>
+            <div style="font-size:0.1rem;width:33%;color:#999999">总金额</div>
+        </div>
+    </div>
+</template>
+
+<script>
+// import storage from '../../../lib/storage.js'
+import { XButton } from 'vux'
+export default {
+    data(){
+        return{
+
+        }
+    },
+    mounted(){
+
+    },
+    components:{
+        XButton
+    },
+    methods:{
+        purchase(){
+            // alert(1)
+            this.$router.push('/transaction/purusdt')
+        }
+    }
+}
+</script>
+
+<style scoped>
+.btn{
+    padding:0 0.1rem;border-radius:0.05rem;background:#2CB772;font-size:0.12rem;margin-right:0;color:#fff
+}
+.item{
+    width:100%;
+    padding:0 0.1rem;
+    background: #fff;
+    padding:0.1rem 0.1rem 0;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    border-radius:0.05rem;
+}
+.icon-1{
+    width:0.12rem;
+    height:0.12rem;
+    /* margin-left:0.05rem */
+}
+.jiaoyiliang{
+    display: inline-block;
+    border-radius:0.03rem;
+    padding:0 0.1rem;
+    margin-left:0.05rem;
+    font-size:0.12rem;
+    border:0.01rem solid #2CB772;
+    color:#2CB772;
+}
+</style>

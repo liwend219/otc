@@ -1,0 +1,49 @@
+<template>
+    <div style="font-size:0.16rem">
+        <!-- <group title="111"> -->
+            312
+            <x-switch title="" style="height：20px;display:inline-block" v-model="value"></x-switch>
+        <!-- </group> -->
+    </div>
+</template>
+
+<script>
+import { XSwitch,Group  } from 'vux'
+export default {
+    data(){
+        return{
+            value:true,
+        }
+    },
+    mounted(){
+        // document.getElementsByClassName('weui-switch')[0].style.width="45px"
+        // document.getElementsByClassName('weui-switch-cp__box')[0].style.width="43px"
+    },
+    components:{
+        XSwitch,
+        Group 
+    }
+}
+</script>
+
+<style scoped>
+.swidth-label{
+    color:#D9D9D9;
+    font-size:0.12rem;
+    line-height:30px;
+}
+.weui-switch:before, .weui-switch-cp__box:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 43px !important;
+    height: 23px;
+    border-radius: 15px;
+    background-color: #FDFDFD;
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+    transition: -webkit-transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+    transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+    transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1), -webkit-transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+}
+</style>

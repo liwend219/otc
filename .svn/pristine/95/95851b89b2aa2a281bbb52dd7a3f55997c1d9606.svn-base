@@ -1,0 +1,31 @@
+<template>
+	<div>
+        <x-button class="test" @click.native="test2" type="primary"> 111</x-button>  
+	</div>
+</template>
+
+<script>
+	import { XInput,XButton } from 'vux'
+	export default {
+		data() {
+            return{
+            	
+            }
+		},
+		mounted() {
+
+		},
+        methods:{
+        	
+        },
+        //注册组件
+    components: {
+        XInput,
+        XButton
+    }
+	}
+</script>
+
+<style scoped>
+
+</style>

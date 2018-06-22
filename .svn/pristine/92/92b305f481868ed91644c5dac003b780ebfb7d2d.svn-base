@@ -1,0 +1,23 @@
+<template>
+    <div>
+        交易单
+    </div>
+</template>
+
+<script>
+import storage from '../../../lib/storage.js'
+export default {
+    data(){
+        return{
+
+        }
+    },
+    mounted(){
+        
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

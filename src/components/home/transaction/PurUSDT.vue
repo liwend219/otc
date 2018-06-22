@@ -1,0 +1,114 @@
+<template>
+    <div>
+        <x-header :left-options="{backText: ''}">买入USDT</x-header>
+        <div class="content">
+            <div class="item">
+                <div>
+                    <img src="../../../images/164501285909002725.png" style="width:0.12rem" alt="">
+                    <span style="font-size:0.12rem;color:#999999;margin-left:0.05rem;">3100单</span>
+                    <span style="font-size:0.12rem;color:#999999;margin-left:0.05rem;">完成率96.88%</span>
+                </div>
+                <div>
+                    <img src="../../../images/zfb@3x.png" style="width:0.12rem" alt="">
+                </div>
+            </div>
+            <div class="item">
+                <div>
+                    <span style="font-size:0.14rem;color:#999999;">单价</span>
+                    <span style="font-size:0.14rem;color:#999999;margin-left:0.5rem;">6.5</span>
+                </div>
+                <div style="font-size:0.14rem;color:#999999;">
+                    CNY
+                </div>
+            </div>
+            <div class="item">
+                <div>
+                    <span style="font-size:0.14rem;">数量</span>
+                    <!-- <span style="font-size:0.14rem;margin-left:0.5rem;">7825.22</span> -->
+                    <input type="number" class="inp" placeholder="请输入数量">
+                </div>
+                <div style="font-size:0.14rem;color:#999999;">
+                    USDT
+                </div>
+            </div>
+            <div class="item">
+                <div>
+                    <span style="font-size:0.14rem;">金额</span>
+                    <!-- <span style="font-size:0.14rem;margin-left:0.5rem;">50863.00</span> -->
+                    <input type="number" class="inp" placeholder="请输入金额">
+                </div>
+                <div style="font-size:0.14rem;color:#999999;">
+                    CNY
+                </div>
+            </div>
+            <div style="font-size:0.1rem;color:#F03A59;padding:0.1rem 0;">请输入正确数量后点击确认按钮完成操作</div>
+            <div class="btn" @click="toDetails">确认</div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { XHeader,XButton  } from 'vux'
+export default {
+    data(){
+        return{
+
+        }
+    },
+    components: {
+        XHeader,
+        XButton 
+    },
+    mounted(){
+    },
+    methods:{
+        toDetails(){
+            // alert(1)
+            this.$router.push('/transaction/orderdetails')
+        }
+    }
+}
+</script>
+
+<style scoped>
+.content{
+    padding:0.1rem;
+    font-size:0.16rem;
+}
+.item{
+    background: #fff;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:0 0.1rem;
+    height:0.5rem;
+    
+}
+.btn{
+    width:100%;
+    height:0.35rem;
+    text-align:center;
+    line-height:0.35rem;
+    font-size:0.14rem;
+    border-radius:0.04rem;
+    border:none;background:#DBE2E9;color:#fff
+}
+.inp{
+    outline: none;
+    border:none;
+    font-size:0.14rem;margin-left:0.5rem;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color: #999999; 
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color: #999999; 
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color: #999999; 
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color: #999999; 
+} 
+</style>

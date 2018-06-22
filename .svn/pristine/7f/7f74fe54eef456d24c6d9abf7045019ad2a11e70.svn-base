@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>otc</title>
+    <style>
+        /* html{font-size:62.5%;} */
+        /* body{font-size:12px;font-size:1.2rem ;} 
+        p{font-size:14px;font-size:1.4rem;} */
+        
+
+        /* @media screen and (min-width:360px) and (max-width:374px) and (orientation:portrait) {
+            html { font-size: 703%; }
+        }
+        @media screen and (min-width:375px) and (max-width:383px) and (orientation:portrait) {
+            html { font-size: 732.4%; }
+        }
+        @media screen and (min-width:384px) and (max-width:399px) and (orientation:portrait) {
+            html { font-size: 750%; }
+        }
+        @media screen and (min-width:400px) and (max-width:413px) and (orientation:portrait) {
+            html { font-size: 781.25%; }
+        }
+        @media screen and (min-width:414px) and (max-width:431px) and (orientation:portrait){
+            html { font-size: 808.6%; }
+        }
+        @media screen and (min-width:432px) and (max-width:479px) and (orientation:portrait){
+            html { font-size: 843.75%; }
+        } */
+    </style>
+  </head>
+  <body>
+    <script>
+      document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 * 2 + 'px';
+      console.log(document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5)
+    </script>
+    <div id="app-box"></div>
+  </body>
+</html>

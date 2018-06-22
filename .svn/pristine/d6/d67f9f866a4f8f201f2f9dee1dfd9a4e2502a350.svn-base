@@ -1,0 +1,89 @@
+<template>
+    <div>
+        <div class="header">
+            <button-tab v-model="demo01" style="width:40%;margin:0 auto;padding-top:8px;">
+                <button-tab-item style="border-left:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc">交易</button-tab-item>
+                <button-tab-item style="border-right:1px solid #ccc;border-top:1px solid #ccc;border-bottom:1px solid #ccc">钱包</button-tab-item>
+            </button-tab>
+        </div>
+        <div class="label">
+            <span>USDT/CNY</span><span>¥6.38</span>
+        </div>
+        <div class="content">
+            <div class="content-menu">
+
+            </div>
+        </div>
+        <div class="test3">
+            132
+        </div>
+    </div>
+</template>
+
+<script>
+//引入组件
+import { XInput,XButton,ButtonTab, ButtonTabItem } from 'vux'
+export default {
+    data (){
+        return {
+            datas:'',
+            demo01:0,
+        }
+    },
+    //初始化
+    mounted(){
+
+    },
+    methods:{
+        test2(){
+            alert(1)
+        }
+    },
+    //注册组件
+    components: {
+        XInput,
+        XButton,
+        ButtonTab,
+        ButtonTabItem
+    }
+}
+</script>
+
+<style scoped>
+.header{
+    height:0.5rem;
+    background: #fff;
+    margin-bottom:10px;
+    /* line-height:50px; */
+}
+.label{
+    height:50px;
+    background: #fff;
+    margin-bottom:10px;
+    line-height: 50px;
+    padding:0 15px;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    justify-content:space-between;
+    font-size:0.36rem;
+}
+.test3{
+    /* font-size:0.16rem; */
+    font-size:16px;
+}
+ul{
+    color:red
+}
+.test{
+    width:250px;
+}
+.content{
+    background: #fff;
+    padding:0 10px;
+    height:100px;
+}
+/* @button-tab-default-background-color{
+    color:#DCD9D9;
+} */
+
+</style>

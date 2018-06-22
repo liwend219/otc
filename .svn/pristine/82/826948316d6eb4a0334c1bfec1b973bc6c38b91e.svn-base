@@ -1,0 +1,28 @@
+<template>
+    <div>
+        钱包
+        <button  @click="test">click</button>
+        <router-view>
+        	
+        </router-view>
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+    	test(){
+    		this.$router.push("/wallet/wellet_01")
+    	}
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

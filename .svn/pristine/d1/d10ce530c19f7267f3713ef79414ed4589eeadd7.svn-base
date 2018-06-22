@@ -1,0 +1,26 @@
+<template>
+    <div>
+        卖出
+    </div>
+</template>
+
+<script>
+import storage from '../../../lib/storage.js'
+export default {
+    data(){
+        return{
+
+        }
+    },
+    created(){
+        
+    },
+    mounted(){
+        
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

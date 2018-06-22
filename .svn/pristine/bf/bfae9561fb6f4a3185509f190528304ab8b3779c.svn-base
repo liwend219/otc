@@ -1,0 +1,41 @@
+<template>
+    <div>
+        <img src="../assets/logo.png" alt="">
+        <x-button class="test" @click.native="test2" type="primary"> 111</x-button>
+    </div>
+</template>
+
+<script>
+//引入组件
+import { XInput,XButton } from 'vux'
+export default {
+    data (){
+        return {
+
+        }
+    },
+    //初始化
+    mounted(){
+
+    },
+    methods:{
+        test2(){
+            alert(1)
+        }
+    },
+    //注册组件
+    components: {
+        XInput,
+        XButton
+    }
+}
+</script>
+
+<style scoped>
+ul{
+    color:red
+}
+.test{
+    width:250px;
+}
+</style>
