@@ -1,6 +1,6 @@
 # otc
 > 无锡中铁公司项目
-> https://github.com/liwend219/otc
+> 预览地址：http://139.196.178.5:9000/#/transaction/purchase
 
 ## 开发人员
 > 李文东
