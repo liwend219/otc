@@ -1,0 +1,160 @@
+<template>
+	<div class="body">
+		<x-header :left-options="{backText: ''}">添加地址</x-header>
+		<div id="body">
+			<div class="list">
+			<ul>
+				<li><span>账户类型:</span><span class="right">请选择账户类型</span></li>
+			</ul>
+			</div>
+			
+			<div class="list">
+			<ul>
+				
+				<li><span>地址:</span><input type="" name="" id="" value="" placeholder="您当前无提现地址/账户"/></li>
+				<li><span>备注:</span><input type="" name="" id="" value="" placeholder="请输入提现金额"/></li>
+			</ul>
+			</div>
+			
+			<div class="list">
+			<ul>
+				<li class="lastli"><span>短信验证码:</span><input type="" name="" id="" value="" placeholder="请输入验证码"/><span id="Sendcode" @click="getcode">发送验证码</span></li>
+				
+			</ul>
+			</div>
+			<!-- <group title=""> -->
+				<group>
+       				<popup-picker :show.sync="showModel" :show-cell="false" title="TEST" :data="dataMenu" v-model="select"></popup-picker>
+     			</group>
+			<!-- </group> -->
+			
+			
+			
+			
+			
+		 <x-button class="submit" @click.native="setadress" style="background: #DBE2E9;color: #FFFFFF;border: none;margin-top: 0.15rem;">确认</x-button>
+			</div>
+			
+	</div>
+</template>
+
+<script>
+	import {XButton,XHeader,Actionsheet,PopupPicker,Group,Popup} from 'vux'
+	import axios from 'axios'
+	import qs from 'qs'
+	export default {
+		data() {
+            return{
+				datas:"提现",
+				select:['BTC'],
+            	dataMenu:[
+					['国际站',
+            	'BTC',
+            	'OKEX']
+				],
+				showModel:false
+            }
+		},
+		mounted() {
+
+		},
+        methods:{
+        	click(){
+        		
+			},
+			
+			//提现地址添加
+			setadress(){
+				axios({
+					method:"POST",
+					url:'http://139.196.178.5:8010/ApiUser/AddressCreate',
+					data:qs.stringify({
+						"UserID":1000,
+						"CID":1,
+						"CodeID":1000,      //验证码id
+						"Code":1,           //验证码
+						"AddType":1000,     //账号类型
+						"AddMsg":1,         //账号地址
+						"Remark":1,         //备注 
+					}),
+				}).then(data =>{
+					console.log("提现地址添加",data.data)
+				}).catch(err =>{
+					console.log(err)
+				})
+			},
+			getcode(){
+				axios({
+					method:"POST",
+					url:'http://139.196.178.5:8010/ApiUser/AddressCreateCode',
+					data:qs.stringify({
+						"UserID":1000,
+						"CID":1,
+					}),
+				}).then(data =>{
+					console.log("发送验证码",data.data)
+				}).catch(err =>{
+					console.log(err)
+				})
+			},
+        },
+        //注册组件
+    components: {
+       XButton,
+       XHeader,
+	   Actionsheet,
+	   PopupPicker,
+	   Group,
+	   Popup,
+    }
+	}
+</script>
+
+<style scoped>
+		.body{
+	width: 100%;
+	height: 100vh;
+}
+#body{
+	padding: 0 0.1rem;
+}
+.list{
+	width: 100%;
+	padding: 0 0.1rem;
+	background: #FFFFFF;
+	margin-top: 0.1rem;
+}
+.list ul{
+	list-style: none;
+}
+.list ul li{
+	font-size: 0.14rem;
+	height: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul li input{
+	width: 65%;
+	height: 0.39rem;
+	border: none;
+	outline: none;
+	font-size: 0.14rem;
+}
+.list ul li .right{
+	width: 65%;
+	color: #999999;
+}
+.list ul .lastli{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul .lastli input{
+	width: 35%;
+	margin-left:4%;
+}
+#Sendcode{
+	color: #64AAFD;
+}
+</style>

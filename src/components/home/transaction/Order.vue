@@ -1,6 +1,6 @@
 <template>
     <div>
-        <x-header @on-click-back="back" :left-options="{backText: ''}">全部订单</x-header>
+        <x-header  @on-click-back="back" :left-options="{preventGoBack:true,backText:''}" >全部订单</x-header>
         <div class="content">
             <tab>
                 <tab-item selected @on-item-click="onItemClick" @click.native="link(0)" style="color:#64ABFF" >未完成</tab-item>
@@ -16,7 +16,7 @@
 
 <script>
 import { XHeader,Tab, TabItem } from 'vux'
-import { setTimeout } from 'timers';
+// import { setTimeout } from 'timers';
 export default {
     data(){
         return{
@@ -27,10 +27,17 @@ export default {
         // document.getElementsByClassName('vux-tab-ink-bar')[0].style.background='#64ABFF'
     },
     mounted(){
-        this.$router.push('/order/notcomplete')
-        let t = setTimeout(()=>{
-            document.getElementsByClassName('vux-tab-ink-bar')[0].style.background='#64ABFF'
-        },50)
+         var UserID = sessionStorage.getItem('UserID')
+         var CID = sessionStorage.getItem('CID')
+        if(!UserID||!CID){
+            this.$router.push('/login')
+        }else{
+            this.$router.push('/order/notcomplete')
+            let t = setTimeout(()=>{
+                document.getElementsByClassName('vux-tab-ink-bar')[0].style.background='#64ABFF'
+            },50)
+        }
+        
         
     },
     methods:{
@@ -41,13 +48,12 @@ export default {
             if(index == 0){
                 this.$router.push('/order/notcomplete')
             }else if(index == 1){
-
+                this.$router.push('/order/ordercomplete')
             }else if(index == 2){
                 this.$router.push('/order/ordercancel')
             }
         },
         back(){
-            console.log(111)
             this.$router.push('/transaction/purchase')
         }
     },

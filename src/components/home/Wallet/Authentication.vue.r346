@@ -1,0 +1,199 @@
+<template>
+	<div class="body">
+		<!--head-->
+		<div>
+		<x-header :left-options="{backText: ''}">{{datas}}</x-header>
+		</div>	
+	<div id="body">
+		<form autocomplete="off" id="myform">
+		<div class="list">
+		
+
+			
+			<ul>
+				<li><span>姓名:</span><input type="" name="Name" id="" value="" placeholder="请输入真实姓名"/></li>
+				<li><span>身份证号码:</span><input type="" name="IDCard" id="" value="" placeholder="请输入真实姓名"/></li>
+			</ul>
+			<div class="pic">
+				<div class="p1">
+					<img src="../../../images/身份证正面@2x.png"/>
+					<input type="file" accept="image/gif, image/jpg, image/bmp, image/png,image/jpeg" id="img1" name="pic1"/>
+				</div>
+				<div class="p2">
+					<img src="../../../images/身份证反面@2x.png"/>
+					<input type="file" accept="image/gif, image/jpg, image/bmp, image/png,image/jpeg" id="img2" name="pic2"/>
+				</div>
+			</div>
+			<p class="id"><span>身份证正面</span><span>身份证背面</span></p>
+			<ul  id="adress">
+				<li><span>支付宝账号:</span><input type="" name="AlipayAccount" id="" value="" placeholder="请输入支付宝账号"/>
+				
+				</li>
+				<li><span>支付宝收款地址:</span><input type="" name="AlipayAddress" id="" value="" placeholder="请输入收款地址 HTTPS://"/>
+				<img src="../../../images/612632544693267931.png"/>
+				</li>
+			</ul>
+		</div>
+	 <div  @click="setaut" style="width: 100%;height: 0.45rem;text-align: center;background: #666666;line-height: 0.45rem;">登录</div>
+		
+		</form>
+		<p class="p_title">身份证上传要求</p>
+		<p class="p_font">1.必须能看清身份证信息。</p>
+		<p class="p_font">2.照片内容真是有效，不得做任何修改。</p>
+		<p class="p_font">3.必须能看清证件号和姓名，支持jpg/jpeg/png。</p>
+	</div>
+	</div>
+	
+	
+</template>
+
+<script>
+	//引入组件
+import { XHeader,XButton} from 'vux'
+import axios from 'axios'
+	import qs from 'qs'
+		export default{
+		  data (){
+        return {
+            datas:'身份认证',
+            demo01:0,
+        }
+    },
+    //初始化
+    mounted(){
+
+    },
+    methods:{
+        //实名认证提交
+			setaut(){
+				 var form = new FormData(document.getElementById("myform"));
+				axios({
+					method:"POST",
+					url:'http://139.196.178.5:8010/ApiUser/RealName',
+					data:qs.stringify({
+						//"UserID":1000,
+						//"CID":1,
+						//"Name":1000,      //姓名
+						//"IDCard":1,           //身份证号
+						//"AlipayAccount":1000,     //支付宝账号
+						//"AlipayAddress":1,         //支付宝收款地址
+						form
+					}),
+				}).then(data =>{
+					console.log("实名认证返回",data.data)
+				}).catch(err =>{
+					console.log(err)
+				})
+			},
+    },
+    //注册组件
+    components: {
+        XHeader,
+        XButton
+    }
+	}
+</script>
+
+<style scoped>
+.body{
+	/*background: #75B4FF;*/
+	width: 100%;
+	/*height: calc(100vh-50);*/
+	height: 100vh;
+}
+#body{
+	width: 100%;
+	padding: 0 0.1rem;
+	margin-top: 0.1rem;
+	background: #FAFAFA;
+}
+.list{
+	width: 100%;
+	padding: 0 0.1rem;
+	background: #FFFFFF;
+}
+.list ul{
+	list-style: none;
+}
+.list ul li{
+	font-size: 0.14rem;
+	height: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul li input{
+	width: 65%;
+	height: 0.39rem;
+	border: none;
+	outline: none;
+	font-size: 0.14rem;
+}
+.pic{
+	margin-top: 0.12rem;
+	width: 100%;
+	height: 0.86rem;
+	/*background: #323232;*/
+	display: flex;
+	justify-content: space-between;
+	
+/*	padding: 0.1rem;*/
+}
+.pic div{
+	width: 48%;
+	height: 0.86rem;
+	/*background: #2CB772;*/
+	position: relative;
+} 
+#img1, #img2 {
+   width: 100%;
+   height: 0.86rem;
+}
+.pic div input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.p1 img{
+	width: 100%;
+   	height: 0.86rem;
+    position: absolute;
+}
+.p2 img{
+	width: 100%;
+   	height: 0.86rem;
+    position: absolute;
+}
+.id{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	font-size: 0.14rem;
+}
+.id span{
+	width: 50%;
+	text-align: center;
+	margin-top: 0.1rem;
+}
+#adress li{
+	display: flex;
+	align-items: center;
+}
+#adress li input{
+	width: 55%;
+}
+#adress li img{
+	width: 0.16rem;
+}
+.p_title{
+	margin-top: 0.1rem;
+	font-size: 0.12rem;
+	color: #323232;
+	margin-bottom: 0.05rem;
+}
+.p_font{
+	font-size: 0.12rem;
+	color: #999999;
+}
+</style>

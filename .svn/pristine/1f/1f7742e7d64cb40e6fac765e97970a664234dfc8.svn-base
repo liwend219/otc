@@ -1,0 +1,112 @@
+<template>
+	<div class="body">
+		<x-header :left-options="{backText: ''}">{{datas}}<a slot="right" style="color: #64AAFD;font-size: 0.14rem;" @click="toPresentrecord">提现记录</a></x-header>
+		<div id="body">
+			
+			<div class="list">
+			<ul>
+				<li><span>币种:</span><span class="right">USDT</span></li>
+				<li><span>提现地址/账户:</span><input type="" name="" id="" value="" placeholder="您当前无提现地址/账户"/></li>
+				<li><span>提现金额:</span><input type="" name="" id="" value="" placeholder="请输入提现金额"/></li>
+			</ul>
+			</div>
+			<x-button class="button" @click.native="toAddaddress" style="background: #64AAFD;color: #FFFFFF;border: none;margin-top: 0.15rem;">+ 添加提现地址/账户</x-button>
+			<p class="tip" style="color: #323232;">提现须知</p>
+			<p class="tip01" style="color: #999999">支持金额：最低提现金额为<span style="color: #FF8833;">0.01</span>BTC。</p>
+			<p  class="tip02">提现限额：每日最高可提现<span style="color: #FF8833;">100</span>BTC，单笔最高可提现<span style="color: #FF8833;">100</span>BTC。</p>
+		    <p class="tip01" style="color: #999999">提现手续费：<span style="color: #FF8833;">0.0005</span>-<span style="color: #FF8833;">0.02</span>BTC。</p>
+		</div>
+	</div>
+</template>
+
+<script>
+	import { XInput,XButton,XHeader} from 'vux'
+	export default {
+		data() {
+            return{
+            	datas:"提现"
+            }
+		},
+		mounted() {
+			
+		},
+        methods:{
+        	
+        	
+			toPresentrecord(){
+				this.$router.push('/wallet/presentrecord')
+			},
+			toAddaddress(){
+				this.$router.push('/wallet/addaddress')
+			},
+        },
+        //注册组件
+    components: {
+        XInput,
+        XButton,
+        XHeader
+    }
+	}
+</script>
+
+<style scoped>
+.body{
+	/*background: #75B4FF;*/
+	width: 100%;
+	height: 100vh;
+}
+#body{
+	padding: 0 0.1rem;
+}
+.list{
+	width: 100%;
+	padding: 0 0.1rem;
+	background: #FFFFFF;
+	margin-top: 0.1rem;
+}
+.list ul{
+	list-style: none;
+}
+.list ul li{
+	font-size: 0.14rem;
+	height: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul li input{
+	width: 65%;
+	height: 0.39rem;
+	border: none;
+	outline: none;
+}
+.list ul li .right{
+	width: 65%;
+}
+.list ul .lastli{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul .lastli input{
+	width: 35%;
+	margin-left: 13%;
+}
+#Sendcode{
+	color: #64AAFD;
+}
+.tip{
+	font-size: .12rem;
+	margin: 0.14rem 0;
+}
+.tip01{
+	font-size: .12rem;
+	margin: 0.14rem 0;
+	color: #999999;
+}
+.tip02{
+	font-size: .12rem;
+	margin: 0.14rem 0;
+	color: #999999;
+}
+</style>

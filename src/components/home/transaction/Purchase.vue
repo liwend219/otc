@@ -1,45 +1,80 @@
 <template>
-    <div style="margin:0.1rem 0">
+<div>
+    <div style="margin:0.1rem 0" v-for="(item,key) in SellArr" :key="key">
         <div class="item">
-            <img src="../../../images/164501285909002725.png" class="icon-1" alt=""><span style="font-size:0.12rem;margin-left:0.05rem;color:#999999">3100单</span><span style="font-size:0.12rem;margin-left:0.05rem;color:#999999">96.88%</span>
-            <img src="../../../images/rz2x.png" class="icon-1" alt="">
-            <span class="jiaoyiliang">30000-500000</span>
-            <span>　　</span>
-            <div class="btn" @click="purchase">
+            <div class="item2">
+                <img src="../../../images/164501285909002725.png" class="icon-1" alt=""><span style="font-size:0.12rem;margin-left:0.1rem;color:#999999">{{item.TradedCount}}单</span><span style="font-size:0.12rem;margin-left:0.1rem;color:#999999">{{(item.TradedNum/item.Num).toFixed(2)}}%</span>
+                <img src="../../../images/rz2x.png" class="icon-1" style="margin-left:0.1rem;" alt="">
+                <span>　　</span>
+            </div>
+            <div class="btn" @click="purchase(item)">
                 买入
             </div>
         </div>
         <div class="item" style="padding-bottom:0.1rem">
-            <div style="font-size:0.14rem;width:33%;color:#323232">6.51</div>
-            <div style="font-size:0.14rem;width:33%;color:#323232">73461.55</div>
-            <div style="font-size:0.14rem;width:33%;color:#323232">47512.01</div>
+            <div style="font-size:0.14rem;width:33%;color:#323232" v-text="item.Price.toFixed(2)"></div>
+            <div style="font-size:0.14rem;width:33%;color:#323232" v-text="item.CanUseNum.toFixed(2)">73461.55</div>
+            <div style="font-size:0.14rem;width:33%;color:#323232" v-text="(item.Price*item.CanUseNum).toFixed(2)">47512.01</div>
             <div style="font-size:0.1rem;width:33%;color:#999999">CNY</div>
             <div style="font-size:0.1rem;width:33%;color:#999999">数量</div>
             <div style="font-size:0.1rem;width:33%;color:#999999">总金额</div>
         </div>
     </div>
+</div>
+    
 </template>
 
 <script>
 // import storage from '../../../lib/storage.js'
 import { XButton } from 'vux'
+import axios from 'axios'
+import { stringify } from 'querystring';
 export default {
     data(){
         return{
-
+            BuyArr:[],
+            SellArr:[],
         }
     },
     mounted(){
-
+        this.init()
     },
     components:{
         XButton
     },
     methods:{
-        purchase(){
-            // alert(1)
-            this.$router.push('/transaction/purusdt')
-        }
+        purchase(item){
+            var UserID = sessionStorage.getItem('UserID')
+			var CID = sessionStorage.getItem('CID')
+			if(!UserID||!CID){
+				this.$router.push('/login')
+			}else{
+                this.$router.push({path:"/transaction/purusdt",query:{"id":item.ID,"price":item.Price,'num':item.CanUseNum}})
+            }
+        },
+        init (){
+            axios({
+                method:"POST",
+                url:'http://139.196.178.5:8010/ApiBus/TradeSaleSelect',
+                data:stringify({
+                    'UserID':sessionStorage.getItem('UserID')
+                })
+            }).then(data =>{
+                console.log(data.data)
+                this.screen(data.data.datas)
+            }).catch(err =>{
+                console.log(err)
+            })
+        },
+        screen(data){
+            data.map(val => {
+                if(val.Type == 1){
+                    this.BuyArr.push(val)
+                }else if(val.Type == 2){
+                    this.SellArr.push(val)
+                }
+            })
+        },
     }
 }
 </script>
@@ -60,10 +95,16 @@ export default {
     flex-wrap:wrap;
     border-radius:0.05rem;
 }
+.item2{
+     display: -webkit-flex; /* Safari */
+    display: flex;
+    align-items:center;
+    justify-content:flex-start;
+}
 .icon-1{
     width:0.12rem;
     height:0.12rem;
-    /* margin-left:0.05rem */
+    /* margin-left:0.1rem */
 }
 .jiaoyiliang{
     display: inline-block;

@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import storage from './lib/storage.js'
+// import storage from './lib/storage.js'
 export default {
   name: 'app',
   data(){
     return{
-
+      
     }
   },
   mounted(){
@@ -24,5 +24,13 @@ export default {
 
 body {
   background-color: #FAFAFA;
+  font-size:0.16rem;
+}
+.weui-dialog__btn_primary{
+  font-size:0.14rem;
+  
+}
+.weui-dialog__btn_default{
+  font-size:0.14rem;
 }
 </style>

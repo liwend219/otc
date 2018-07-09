@@ -1,0 +1,16 @@
+import fetch from '../lib/fetch';
+import Root from '../lib/root';
+import qs from 'qs'
+const http = Root.http
+//发送验证码
+export function sendMsg(val) {
+    const data = qs.stringify({
+        'Account':val
+    })
+    return fetch({
+        baseURL: http,
+        url: "/ApiUser/LoginCode",
+        data
+    });
+}
+

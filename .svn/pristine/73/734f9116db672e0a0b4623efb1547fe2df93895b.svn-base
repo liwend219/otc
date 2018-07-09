@@ -15,10 +15,13 @@ import Order from './components/home/transaction/Order'
 import Transactionpassword from './components/Transactionpassword'
 import Forgetpassword from './components/Forgetpassword'
 import wellet_01 from './components/home/Wallet/Wellet_01'
-import Notcomplete from './components/home/transaction/order/Notcomplete.vue'
-import Ordercancel from './components/home/transaction/order/Ordercancel.vue'
-import PurUSDT from './components/home/transaction/PurUSDT'
-import Orderdetails from './components/home/transaction/Orderdetails'
+import Authentication from './components/home/Wallet/Authentication'
+import Receivables from './components/home/Wallet/Receivables'
+import Modifypassword from './components/home/Wallet/Modifypassword'
+import Putforward from './components/home/Wallet/Putforward'
+import Presentrecord from './components/home/Wallet/Presentrecord'
+import Addaddress from './components/home/Wallet/Addaddress'
+import Capitaltransfer from './components/home/Wallet/Capitaltransfer'
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,6 +37,7 @@ const routes = [
                    	path:'/wallet/wellet_01',
                    	component:wellet_01,
                    },
+                   
                 ]
             },
             {
@@ -59,28 +63,38 @@ const routes = [
                 ]
             }
         ]
-    },
+    },               //钱包下
+    				{
+                   	path:'/wallet/authentication',
+                   	component:Authentication,
+                   },
+                   {
+                   	path:'/wallet/receivables',
+                   	component:Receivables,
+                   },
+                   {
+                   	path:'/wallet/modifypassword',
+                   	component:Modifypassword,
+                   },
+                    {
+                   	path:'/wallet/putforward',
+                   	component:Putforward,
+                   },
+                   {
+                   	path:'/wallet/presentrecord',
+                   	component:Presentrecord,
+                   },
+                    {
+                   	path:'/wallet/addaddress',
+                   	component:Addaddress,
+                   },
+                   {
+                   	path:'/wallet/capitaltransfer',
+                   	component:Capitaltransfer,
+                   },
     {
-        path:'/order',
-        component:Order,
-        children:[
-            {
-                path:'/order/notcomplete',
-                component:Notcomplete
-            },
-            {
-                path:'/order/ordercancel',
-                component:Ordercancel
-            }
-        ]
-    },
-    {
-        path:'/transaction/purusdt',
-        component:PurUSDT
-    },
-    {
-        path:'/transaction/orderdetails',
-        component:Orderdetails
+        path:'/transaction/order',
+        component:Order
     },
     {
         path: '/login',

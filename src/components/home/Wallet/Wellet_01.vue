@@ -2,33 +2,33 @@
 	<div class="body">
 		<div id="body">
 	      <div class="header_02">
-	      	<div id="">
+	      	<div id="" @click="getdata">
 	      		<img src="../../../images/男头像@2x.png" alt="" />
-	      	<span class="phone">1223456748879</span>
+	      	<span class="phone" v-text="datas.Account"></span>
 	      	</div>
 	      	<img src="../../../images/客服@2x.png" class="kefu"/>
 	      </div>
 	      <div class="content">
 	      	<p class="title">账户总余额(USDT)</p>
-	      	<p class="money">123456</p>
+	      	<p class="money" v-text="datas.Money"></p>
 	      	<p class="title_2"><span class="left">可用余额</span><span class="right">冻结金额</span></p>
-	      	<p class="money_2"><span class="left">50000</span><span class="right">546132313</span></p>
+	      	<p class="money_2"><span class="left" v-text="datas.CanUseMoney"></span><span class="right" v-text="datas.FreezingMoney"></span></p>
 	      	<div class="foot">
-	      		<div class="f1"><img src="../../../images/提现@2x.png" style="width: 0.18rem;margin-right: 0.05rem;"/>提现</div>
-	      		<div class="f2"><img src="../../../images/切换@2x.png" style="width: 0.18rem;margin-right: 0.05rem;"/>资金划转</div>
-	      		<div class="f3"><img src="../../../images/提现@2x.png" style="width: 0.18rem;margin-right: 0.05rem;"/>记录</div>
+	      		<div class="f1" @click="toPutforward"><img src="../../../images/提现@2x.png" style="width: 0.18rem;margin-right: 0.05rem;"/>提现</div>
+	      		<div class="f2" @click="toCapitaltransfer"><img src="../../../images/切换@2x.png" style="width: 0.18rem;margin-right: 0.05rem;"/>资金划转</div>
+	      		<div class="f3" @click="toRecord"><img src="../../../images/提现@2x.png" style="width: 0.18rem;margin-right: 0.05rem;"/>记录</div>
 	      	</div>
 	      </div>
 	      <div id="list">
 	      	<ul>
-	      		<li>
+	      		<li @click="toAuthentication">
 	      			<div>
 	      				<img src="../../../images/身份证@2x.png" style="width: 0.185rem;vertical-align: middle;"/>
 	      			<span style="margin-left: 0.14rem;">身份认证</span>
 	      			</div>
 	      			<img src="../../../images/钱包_箭头@2x.png" style="width: 0.15rem;"/>
 	      		</li>
-	      		<li>
+	      		<li @click="toModifypassword">
 	      			<div>
 	      			<img src="../../../images/密码_2@2x.png" style="width: 0.185rem;vertical-align: middle;"/>
 	      			<span style="margin-left: 0.14rem;">交易密码</span>
@@ -36,7 +36,7 @@
 	      			
 	      			<img src="../../../images/钱包_箭头@2x.png" style="width: 0.15rem;"/>
 	      		</li>
-	      		<li>
+	      		<li  @click="toHelpCore">
 	      			<div>
 	      			<img src="../../../images/帮助中心_2@2x.png" style="width: 0.185rem;vertical-align: middle;"/>
 	      			<span style="margin-left: 0.14rem;">帮助中心</span>
@@ -44,7 +44,7 @@
 	      			
 	      			<img src="../../../images/钱包_箭头@2x.png" style="width: 0.15rem;"/>
 	      		</li>
-	      		<li>
+	      		<li @click="toLogoin">
 	      			<div>
 	      			<img src="../../../images/137159389358792014.png" style="width: 0.185rem;vertical-align: middle;"/>
 	      			<span style="margin-left: 0.14rem;">切换用户</span>
@@ -59,8 +59,73 @@
 </template>
 
 <script>
+	import axios from 'axios'
+	import qs from 'qs'
 	export default{
-		
+		data(){
+			return{
+				datas:'',
+			}
+		},
+		mounted(){
+			var UserID = sessionStorage.getItem('UserID')
+			var CID = sessionStorage.getItem('CID')
+			if(!UserID||!CID){
+				this.$router.push('/login')
+			}else{
+				this.getdata()
+			}
+			
+		},
+		methods:{
+			toHelpCore(){
+				this.$router.push('/wallet/receivables')
+			},
+			toLogoin(){
+				this.$router.push('/login')
+			},
+			toAuthentication(){
+				if(this.datas.IsCheck == 1){
+					this.$vux.toast.text('实名认证已通过')
+					return
+				}else if(this.datas.IsCheck == 2){
+					this.$vux.toast.text('审核中，请耐心等待')
+					return
+				}
+				this.$router.push('/wallet/authentication')
+			},
+			toModifypassword(){
+				this.$router.push('/wallet/modifypassword')
+			},
+			toCapitaltransfer(){
+				this.$router.push('/wallet/capitaltransfer')
+			},
+			toPutforward(){
+				this.$router.push('/wallet/Putforward')
+			},
+			toRecord(){
+				this.$router.push('/wallet/record')
+			},
+			getdata(){
+        		axios({
+					method:"POST",
+					url:'http://139.196.178.5:8010/ApiUser/GetUser',
+					data:qs.stringify({
+						"UserID":sessionStorage.getItem('UserID'),
+						"CID":sessionStorage.getItem('CID')
+					}),
+				}).then(data =>{
+					if(data.data.rs){
+						this.datas = data.data.datas
+						sessionStorage.setItem('CID',data.data.datas.cid)
+					}else{
+						this.$vux.toast.text(data.data.msg)
+					}
+				}).catch(err =>{
+					console.log(err)
+				})
+        	},
+		}
 	}
 </script>
 

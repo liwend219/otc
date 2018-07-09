@@ -1,0 +1,120 @@
+<template>
+	<div class="body">
+		<x-header :left-options="{backText: ''}">添加地址</x-header>
+		<div id="body">
+			<div class="list">
+			<ul>
+				<li><span>账户类型:</span><span class="right">请选择账户类型</span></li>
+			</ul>
+			</div>
+			
+			<div class="list">
+			<ul>
+				
+				<li><span>地址:</span><input type="" name="" id="" value="" placeholder="您当前无提现地址/账户"/></li>
+				<li><span>备注:</span><input type="" name="" id="" value="" placeholder="请输入提现金额"/></li>
+			</ul>
+			</div>
+			
+			<div class="list">
+			<ul>
+				<li class="lastli"><span>短信验证码:</span><input type="" name="" id="" value="" placeholder="请输入验证码"/><span id="Sendcode">发送验证码</span></li>
+				
+			</ul>
+			</div>
+			<actionsheet
+      v-model="show1"
+      :menus="menus1"
+      @on-click-menu="click"
+      @on-after-hide="log('after hide')"
+      @on-after-show="log('after show')"></actionsheet>
+			
+			
+			
+			
+			
+		 <x-button class="submit" style="background: #DBE2E9;color: #FFFFFF;border: none;margin-top: 0.15rem;">确认</x-button>
+			</div>
+			
+	</div>
+</template>
+
+<script>
+	import {XButton,XHeader,Actionsheet} from 'vux'
+	export default {
+		data() {
+            return{
+            	datas:"提现",
+            	show1:'',
+            	menus1:[
+            	'国际站',
+            	'BTC',
+            	'OKEX'
+            	]
+            }
+		},
+		mounted() {
+
+		},
+        methods:{
+        	click(){
+        		
+        	}
+        },
+        //注册组件
+    components: {
+       XButton,
+       XHeader,
+       Actionsheet
+    }
+	}
+</script>
+
+<style scoped>
+		.body{
+	width: 100%;
+	height: 100vh;
+}
+#body{
+	padding: 0 0.1rem;
+}
+.list{
+	width: 100%;
+	padding: 0 0.1rem;
+	background: #FFFFFF;
+	margin-top: 0.1rem;
+}
+.list ul{
+	list-style: none;
+}
+.list ul li{
+	font-size: 0.14rem;
+	height: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul li input{
+	width: 65%;
+	height: 0.39rem;
+	border: none;
+	outline: none;
+	font-size: 0.14rem;
+}
+.list ul li .right{
+	width: 65%;
+	color: #999999;
+}
+.list ul .lastli{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.list ul .lastli input{
+	width: 35%;
+	margin-left:4%;
+}
+#Sendcode{
+	color: #64AAFD;
+}
+</style>

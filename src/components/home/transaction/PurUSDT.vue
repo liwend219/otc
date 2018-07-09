@@ -15,7 +15,7 @@
             <div class="item">
                 <div>
                     <span style="font-size:0.14rem;color:#999999;">单价</span>
-                    <span style="font-size:0.14rem;color:#999999;margin-left:0.5rem;">6.5</span>
+                    <span style="font-size:0.14rem;color:#999999;margin-left:0.5rem;" v-text="price"></span>
                 </div>
                 <div style="font-size:0.14rem;color:#999999;">
                     CNY
@@ -25,7 +25,7 @@
                 <div>
                     <span style="font-size:0.14rem;">数量</span>
                     <!-- <span style="font-size:0.14rem;margin-left:0.5rem;">7825.22</span> -->
-                    <input type="number" class="inp" placeholder="请输入数量">
+                    <input type="number" v-model="Amount" class="inp" placeholder="请输入数量">
                 </div>
                 <div style="font-size:0.14rem;color:#999999;">
                     USDT
@@ -35,37 +35,94 @@
                 <div>
                     <span style="font-size:0.14rem;">金额</span>
                     <!-- <span style="font-size:0.14rem;margin-left:0.5rem;">50863.00</span> -->
-                    <input type="number" class="inp" placeholder="请输入金额">
+                    <!-- <input type="number" v-model="money" class="inp" placeholder="请输入金额"> -->
+                    <span v-text="money" class="inp"></span>
                 </div>
                 <div style="font-size:0.14rem;color:#999999;">
                     CNY
                 </div>
             </div>
             <div style="font-size:0.1rem;color:#F03A59;padding:0.1rem 0;">请输入正确数量后点击确认按钮完成操作</div>
-            <div class="btn" @click="toDetails">确认</div>
+            <div class="btn">
+                <x-button type="primary" :disabled="btnDisabled" @click.native="toDetails" style="background:#64AAFD;height:0.35rem;font-size:0.14rem">确认，并支付</x-button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { XHeader,XButton  } from 'vux'
+import { XHeader,XButton,Toast } from 'vux'
+import axios from 'axios'
+import qs from 'qs'
 export default {
     data(){
         return{
-
+            btnDisabled:false,
+            Amount:'',
+            money:0.00,
+            price:0,
         }
     },
     components: {
         XHeader,
-        XButton 
+        XButton,
+        Toast,
+    },
+    watch:{
+        Amount:function(val1){
+            if(this.Amount <= 0){
+                this.money = 0
+            }else{
+                this.money =  this.Amount*10000*this.price/10000
+            }   
+            
+        }
     },
     mounted(){
+        console.log(this.$route.query.ID)
+        this.price = this.$route.query.price
+        this.Amount = this.$route.query.num
     },
     methods:{
         toDetails(){
-            // alert(1)
-            this.$router.push('/transaction/orderdetails')
-        }
+            if(!this.isNull()){
+                return
+            }
+            axios({
+                method:"POST",
+                url:'http://139.196.178.5:8010/ApiBus/OrderCreate',
+                data:qs.stringify({
+                    UserID:sessionStorage.getItem('UserID'),
+                    CID:sessionStorage.getItem('CID'),
+                    type:'1',
+                    TradeID:this.$route.query.id,
+                    PWD:'',
+                    Money:this.money,
+                    Num:this.Amount,
+                    Price:this.price
+                })
+            }).then(data =>{
+                this.$vux.toast.text(data.data.msg)
+                if(data.data.rs){
+                    this.$router.push({path:'/transaction/orderdetails',query:{id:data.data.datas.ID}})
+                }else{
+                    
+                }
+            }).catch(err =>{
+                console.log(err)
+            })
+            // this.$router.push('/transaction/orderdetails')
+        },
+        isNull(){
+            if(this.Amount == ""){
+                this.$vux.toast.text('数量不能为空')
+                return false
+            }else if(this.money == ""){
+                this.$vux.toast.text('金额不能为空')
+                return false
+            }
+            return true
+        },
     }
 }
 </script>
@@ -85,14 +142,18 @@ export default {
     height:0.5rem;
     
 }
-.btn{
+/* .btn{
     width:100%;
     height:0.35rem;
     text-align:center;
     line-height:0.35rem;
     font-size:0.14rem;
     border-radius:0.04rem;
-    border:none;background:#DBE2E9;color:#fff
+    border:none;background:#64AAFD;color:#fff
+} */
+.btn{
+    width:100%;
+    font-size:0.1rem;
 }
 .inp{
     outline: none;

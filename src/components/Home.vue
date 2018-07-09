@@ -23,16 +23,21 @@ export default {
             demo01:0,
         }
     },
+    created(){
+        if(this.$route.query.idx){
+            this.demo01 = parseInt(this.$route.query.idx)
+        }
+    },
     //初始化
     mounted(){
-        this.$router.push('/transaction/purchase')
+        
     },
     methods:{
         toTransaction(){
             this.$router.push('/transaction/purchase')
         },
         toWallet(){
-            this.$router.push('/wallet')
+            this.$router.push('/wallet/wellet_01')
         },
         
     },

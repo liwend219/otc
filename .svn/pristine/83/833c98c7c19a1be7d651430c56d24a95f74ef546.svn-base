@@ -15,6 +15,15 @@ import Order from './components/home/transaction/Order'
 import Transactionpassword from './components/Transactionpassword'
 import Forgetpassword from './components/Forgetpassword'
 import wellet_01 from './components/home/Wallet/Wellet_01'
+import Notcomplete from './components/home/transaction/order/Notcomplete.vue'
+import Ordercancel from './components/home/transaction/order/Ordercancel.vue'
+import PurUSDT from './components/home/transaction/PurUSDT'
+import Orderdetails from './components/home/transaction/Orderdetails'
+import Selldetails from './components/home/transaction/Selldetails'
+import Authentication from './components/home/Wallet/Authentication'
+import SellUSDT from './components/home/transaction/SellUSDT'
+import Orderfinish from './components/home/transaction/Orderfinish'
+import RelTradesheet from './components/home/RelTradesheet.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,6 +39,7 @@ const routes = [
                    	path:'/wallet/wellet_01',
                    	component:wellet_01,
                    },
+                   
                 ]
             },
             {
@@ -57,8 +67,46 @@ const routes = [
         ]
     },
     {
+        path:'/order',
+        component:Order,
+        children:[
+            {
+                path:'/order/notcomplete',
+                component:Notcomplete
+            },
+            {
+                path:'/order/ordercancel',
+                component:Ordercancel
+            }
+        ]
+    },
+    {
+        path:'/relradesheet',
+        component:RelTradesheet
+    },
+    {
         path:'/transaction/order',
         component:Order
+    },
+    {
+        path:'/transaction/purusdt',
+        component:PurUSDT
+    },
+    {
+        path:'/transaction/sellusdt',
+        component:SellUSDT,
+    },
+    {
+        path:'/transaction/orderdetails',
+        component:Orderdetails
+    },
+    {
+        path:'/transaction/selldetails',
+        component:Selldetails
+    },
+    {
+        path:'/transaction/orderfinish',
+        component:Orderfinish
     },
     {
         path: '/login',

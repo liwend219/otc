@@ -4,42 +4,89 @@
 			
 		
        <div class="header">
-       		<img src="../images/登录_关闭@2x.png" class="picone"/>
+       		<img src="../images/登录_关闭@2x.png" @click="close" class="picone"/>
        </div>
        <p class="Log"><span id="login_font">设置交易密码</span></p>
 			<p class="welcome">请设置您的交易密码</p>
 			<div class="inpt_1">
 				
-				<input type="number" placeholder="请输入六位数字交易密码"/>
+				<input type="password" v-model="password" placeholder="请输入六位数字交易密码"/>
 			</div>
 			<div class="inpt_2">
-				<input type="number" placeholder="请再次输入六位数字交易密码"/>
+				<input type="password" v-model="qrpassword" placeholder="请再次输入六位数字交易密码"/>
 				
 			</div>
-			 <x-button class="submit">确定</x-button>
+			 <x-button class="submit" @click.native="sure">确定</x-button>
 		</div>
 	</div>
 	
 </template>
 
 <script>
-	import { XInput,XButton } from 'vux'
+	import { XInput,XButton,ToastPlugin,Toast } from 'vux'
+	import axios from 'axios'
+	import qs from 'qs'
 	export default {
 		data() {
             return{
-            	
+            	password:'',
+            	qrpassword:'',
+            	ntp:"",
             }
 		},
 		mounted() {
 
 		},
         methods:{
-        	
+        	isNull(){
+				if(this.password == ""){
+					this.$vux.toast.text('密码不能为空')
+					return false
+				}else if(this.qrpassword == ""){
+					this.$vux.toast.text('确认密码不能为空')
+					return false
+				}else if(this.password != this.qrpassword){
+					this.$vux.toast.text('两次输入密码不一致')
+					return false
+				}else if(this.password.length != 6){
+					this.$vux.toast.text('密码长度有误')
+					return false
+				}
+				return true
+			},
+			close(){
+				this.$router.push('/')
+			},
+			sure(){
+				if(!this.isNull()){
+					return
+				}
+				axios({
+					method:"POST",
+					url:'http://139.196.178.5:8010/ApiUser/SetTraderPwd',
+					data:qs.stringify({
+						"UserID":sessionStorage.getItem('UserID'),
+						"CID":sessionStorage.getItem('CID'),
+						"PWD":this.password,
+					}),
+				}).then(data =>{
+					this.$vux.toast.text(data.data.msg)
+					if(data.data.rs){
+						this.$router.push('/transaction/purchase')
+					}
+					console.log(data)
+				}).catch(err =>{
+					console.log(err)
+				})
+			}	
         },
+        
         //注册组件
     components: {
         XInput,
-        XButton
+        XButton,
+        ToastPlugin,
+        Toast,
     }
 	}
 </script>

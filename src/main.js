@@ -16,12 +16,26 @@ import Transactionpassword from './components/Transactionpassword'
 import Forgetpassword from './components/Forgetpassword'
 import wellet_01 from './components/home/Wallet/Wellet_01'
 import Notcomplete from './components/home/transaction/order/Notcomplete.vue'
+import Ordercomplete from './components/home/transaction/order/Ordercomplete.vue'
 import Ordercancel from './components/home/transaction/order/Ordercancel.vue'
 import PurUSDT from './components/home/transaction/PurUSDT'
 import Orderdetails from './components/home/transaction/Orderdetails'
+import Selldetails from './components/home/transaction/Selldetails'
 import Authentication from './components/home/Wallet/Authentication'
+import SellUSDT from './components/home/transaction/SellUSDT'
+import Orderfinish from './components/home/transaction/Orderfinish'
+import RelTradesheet from './components/home/RelTradesheet.vue'
+import Receivables from './components/home/Wallet/Receivables'
+import Modifypassword from './components/home/Wallet/Modifypassword'
+import Putforward from './components/home/Wallet/Putforward'
+import Presentrecord from './components/home/Wallet/Presentrecord'
+import Addaddress from './components/home/Wallet/Addaddress'
+import Capitaltransfer from './components/home/Wallet/Capitaltransfer'
+import Record from './components/home/Wallet/Record'
 Vue.use(VueRouter)
-
+import  { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
+// Vue.use(ToastPlugin, {position: 'top'})
 const routes = [
     {
         path: '/',
@@ -61,8 +75,8 @@ const routes = [
                 ]
             }
         ]
-    },
-    {
+    },               //钱包下
+    				{
         path:'/order',
         component:Order,
         children:[
@@ -71,14 +85,51 @@ const routes = [
                 component:Notcomplete
             },
             {
+                path:'/order/ordercomplete',
+                component:Ordercomplete
+            },
+            {
                 path:'/order/ordercancel',
                 component:Ordercancel
             }
         ]
     },
-                //    	path:'/wallet/authentication',
-                //    	component:Authentication,
-                //    },
+                   {
+                   	path:'/wallet/receivables',
+                   	component:Receivables,
+                   },
+                   {
+                   	path:'/wallet/modifypassword',
+                   	component:Modifypassword,
+                   },
+                    {
+                   	path:'/wallet/putforward',
+                   	component:Putforward,
+                   },
+                   {
+                   	path:'/wallet/presentrecord',
+                   	component:Presentrecord,
+                   },
+                    {
+                   	path:'/wallet/addaddress',
+                   	component:Addaddress,
+                   },
+                   {
+                   	path:'/wallet/capitaltransfer',
+                   	component:Capitaltransfer,
+                   },
+                    {
+                   	path:'/wallet/authentication',
+                   	component:Authentication,
+                   },
+                   {
+                       path:'/wallet/record',
+                       component:Record
+                   },
+    {
+        path:'/relradesheet',
+        component:RelTradesheet
+    },
     {
         path:'/transaction/order',
         component:Order
@@ -88,8 +139,20 @@ const routes = [
         component:PurUSDT
     },
     {
+        path:'/transaction/sellusdt',
+        component:SellUSDT,
+    },
+    {
         path:'/transaction/orderdetails',
         component:Orderdetails
+    },
+    {
+        path:'/transaction/selldetails',
+        component:Selldetails
+    },
+    {
+        path:'/transaction/orderfinish',
+        component:Orderfinish
     },
     {
         path: '/login',
@@ -114,7 +177,8 @@ FastClick.attach(document.body)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+var vm = new Vue({
     router,
+    idx:0,
     render: h => h(App)
 }).$mount('#app-box')

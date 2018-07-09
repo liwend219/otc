@@ -1,0 +1,150 @@
+<template>
+    <div>
+        <x-header :left-options="{backText: ''}">发布交易单</x-header>
+        <div class="head-title">
+            <span style="font-size:0.18rem">
+                USDT/CNY
+            </span>
+            <span>
+                ¥6.38
+            </span>
+        </div>
+        <div class="content">
+            <tab>
+                <tab-item selected @on-item-click="onItemClick" @click.native="link(0)" style="color:#2CB772" >买入USDT</tab-item>
+                <tab-item @on-item-click="onItemClick" @click.native="link(1)" style="color:#F03A59" >卖出USDT</tab-item>
+            </tab>
+            <div class="item" style="margin-top:0.1rem">
+                <div>
+                    <span style="font-size:0.14rem;color:#999999;">单价</span>
+                    <span style="font-size:0.14rem;color:#999999;margin-left:0.5rem;">6.5</span>
+                </div>
+                <div style="font-size:0.14rem;color:#999999;">
+                    CNY
+                </div>
+            </div>
+            <div class="item">
+                <div>
+                    <span style="font-size:0.14rem;">数量</span>
+                    <input  class="inp" placeholder="请输入数量">
+                </div>
+                <div style="font-size:0.14rem;color:#999999;">
+                    USDT
+                </div>
+            </div>
+             <div class="item">
+                <div>
+                    <span style="font-size:0.14rem;">金额</span>
+                    <input  class="inp" placeholder="最小交易单总额为2000">
+                </div>
+                <div style="font-size:0.14rem;color:#999999;">
+                    CNY
+                </div>
+            </div>
+             <div class="item">
+                <div>
+                    <span style="font-size:0.14rem;">交易说明</span>
+                </div>
+                <div style="font-size:0.12rem;color:#999999;">
+                    1.订单有效期15分钟，请及时付款并点击「我已支付」按钮。2.币由系统锁定托管，请安心下单
+                </div>
+            </div>
+        </div>
+        <div class="btn">
+            <x-button type="primary" :disabled="btnDisabled" @click.native="sure" style="background:#64AAFD;height:0.35rem;font-size:0.14rem">确认，并支付</x-button>
+        </div>
+    </div>
+</template>
+
+<script>
+import { XHeader,XButton,Popup,PopupHeader,Group,Tab, TabItem } from 'vux'
+export default {
+    data(){
+        return{
+            btnDisabled:false
+        }
+    },
+    methods:{
+        link(){
+
+        },
+        onItemClick(index){
+            var color = '';
+            if(index == 0){
+                color = '#2CB772'
+            }else if(index == 1){
+                color = '#F03A59'
+            }else if(index == 2){
+                color = '#184DF2'
+            }else if(index == 3){
+                color = "#323232"
+            }else{
+                color = ""
+            }
+            document.getElementsByClassName('vux-tab-ink-bar')[0].style.background=color
+        },
+        sure(){}
+    },
+    components: {
+        XHeader,
+        XButton,
+        Popup,
+        PopupHeader ,
+        Group,
+        Tab,
+        TabItem
+    },
+}
+</script>
+
+<style scoped>
+.head-title{
+    height:0.44rem;
+    background: #fff;
+    margin-top:0.1rem;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 0.15rem; 
+}
+.content{
+    padding:0.1rem;
+    /* background: #fff; */
+}
+.item{
+    background: #fff;
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    padding:0.1rem 0.1rem;
+    /* height:0.5rem; */
+}
+.inp{
+    outline: none;
+    border:none;
+    font-size:0.14rem;margin-left:0.5rem;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color: #999999; 
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color: #999999; 
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+    color: #999999; 
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color: #999999; 
+} 
+.btn{
+    position: fixed;
+    /* right:0.1rem; */
+    width:100%;
+    bottom:0;
+    padding:0.1rem;
+    font-size:0.1rem;
+}
+</style>

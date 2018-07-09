@@ -16,11 +16,12 @@
 
             </router-view>
         </div>
+        <img src="../../images/tjjyd.png" @click="addJiaoyidan" class="jiaoyi-btn" alt="">
     </div>
 </template>
 <script>
 import {Tab, TabItem } from 'vux'
-import storage from '../../lib/storage.js'
+// import storage from '../../lib/storage.js'
 export default {
     data(){
         return {
@@ -38,7 +39,7 @@ export default {
             }else if(index == 2){
                 this.$router.push('/transaction/tradesheet')
             }else if(index == 3){
-                this.$router.push('/order')
+                this.$router.push('/order/notcomplete')
             }else{
 
             }
@@ -57,6 +58,15 @@ export default {
                 color = ""
             }
             document.getElementsByClassName('vux-tab-ink-bar')[0].style.background=color
+        },
+        addJiaoyidan(){
+            var UserID = sessionStorage.getItem('UserID')
+			var CID = sessionStorage.getItem('CID')
+			if(!UserID||!CID){
+				this.$router.push('/login')
+			}else{
+                this.$router.push('/relradesheet')
+            }
         }
     },
     components: {
@@ -82,5 +92,15 @@ export default {
     /* background: #fff; */
     padding:0 0.1rem;
     /* height:0.1rem; */
+}
+.jiaoyi-btn{
+    width: 0.4rem;
+    height:0.4rem;
+    line-height:0.4rem;
+    text-align: center;
+    border-radius:50%;
+    position: fixed;
+    bottom:0.6rem;
+    right:0.2rem;
 }
 </style>
