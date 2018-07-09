@@ -1,9 +1,11 @@
 # otc
 > 无锡中铁公司项目
+> https://github.com/liwend219/otc
 
 ## 开发人员
 > 李文东
 > 987671764@qq.com
+> github: https://github.com/liwend219
 
 ## Build Setup
 
