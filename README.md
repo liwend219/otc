@@ -1,10 +1,12 @@
 # otc
 > 无锡中铁公司项目
+>
 > 预览地址：http://139.196.178.5:9000/#/transaction/purchase
 
 ## 开发人员
 > 李文东
-> 987671764@qq.com
+> 邮箱： 987671764@qq.com
+>
 > github: https://github.com/liwend219
 
 ## Build Setup
