@@ -1,6 +1,9 @@
 # otc
+> 无锡中铁公司项目
 
-> A Vue.js project
+## 开发人员
+> 李文东
+> 987671764@qq.com
 
 ## Build Setup
 
